@@ -11,5 +11,10 @@ namespace Dominio
         private List<Agencia> _agencias = new List<Agencia>();
         private List<Destino> _destinos = new List<Destino>();
         private List<Paquete> _paquetes = new List<Paquete>();
+
+        public Sistema() 
+        {
+        
+        }
     }
 }
