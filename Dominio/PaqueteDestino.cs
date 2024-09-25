@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    internal class PaqueteDestino : IValidable
+    public class PaqueteDestino : IValidable
     {
         private Destino _destino;
         private int _dias;
@@ -16,6 +16,11 @@ namespace Dominio
         {
             _destino = destino;
             _dias = dias;
+        }
+
+        public int Dias
+        {
+            get { return _dias; }
         }
 
         public void Validar()
@@ -32,6 +37,12 @@ namespace Dominio
         public double CalcularSubtotal()
         {
             return _dias * _destino.PrecioPorDia;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            PaqueteDestino pd = obj as PaqueteDestino;
+            return pd != null && pd._destino.Equals(_destino);
         }
     }
 }

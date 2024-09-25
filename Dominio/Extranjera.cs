@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    internal class Extranjera : Agencia
+    public class Extranjera : Agencia
     {
         private int _calificacion;
 

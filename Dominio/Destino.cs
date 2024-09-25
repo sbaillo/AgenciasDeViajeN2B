@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    internal class Destino : IValidable
+    public class Destino : IValidable
     {
         private string _codigo;
         private string _nombre;
@@ -29,6 +29,11 @@ namespace Dominio
             get { return _precioPorDia; }
         }
 
+        public string Codigo
+        {
+            get { return _codigo; }
+        }
+
         public void Validar()
         {
             if (string.IsNullOrEmpty(_nombre)) throw new Exception("El nombre no puede ser vacio");
@@ -40,6 +45,12 @@ namespace Dominio
         public void ValidarCodigo()
         {
             if (string.IsNullOrEmpty(_codigo) || _codigo.Length != 8) throw new Exception("El codigo debe tener un largo de 8 caracteres");
+        }
+
+        public override bool Equals(object obj)
+        {
+            Destino destino = obj as Destino;
+            return destino != null && this._codigo == destino._codigo;
         }
     }
 }

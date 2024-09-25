@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    internal class Paquete : IValidable
+    public class Paquete : IValidable
     {
         private static int s_ultId = 1;
         private int _id;
@@ -24,6 +24,11 @@ namespace Dominio
             _agencia = agencia;
         }
 
+        public int Id
+        {
+            get { return _id; }
+        }
+
         public void Validar()
         {
             if (_agencia == null) throw new Exception("La agencia no puede ser nula");
@@ -38,6 +43,24 @@ namespace Dominio
                 total += pd.CalcularSubtotal();
             }
 
+            return total;
+        }
+
+        public void AltaDestino(PaqueteDestino pd)
+        {
+            if (pd == null) throw new Exception("El paquete-destino no puede ser nulo");
+            pd.Validar();
+            if (_destinos.Contains(pd)) throw new Exception("Ya existe el destino en el paquete");
+            _destinos.Add(pd);
+        }
+
+        public int CalcularTotalDias()
+        {
+            int total = 0;
+            foreach(PaqueteDestino pd in _destinos)
+            {
+                total =+ pd.Dias;
+            }
             return total;
         }
     }
