@@ -42,5 +42,9 @@ namespace Dominio
         {
             return $"{_nombre} - Pais: {_pais}";
         }
+
+        public abstract double DevolverPorcentajeDescuento();
+
+        public abstract double DevolverPrecioConDescuentoAplicado(double subTotal);
     }
 }

@@ -25,5 +25,19 @@ namespace Dominio
             base.Validar();
             ValidarCalificacion();
         }
+
+        public override double DevolverPorcentajeDescuento()
+        {
+            double descuento = 5;
+            if (_calificacion > 3) descuento = 8;
+            return descuento;
+        }
+
+        public override double DevolverPrecioConDescuentoAplicado(double subTotal)
+        {
+            double total = subTotal *= 0.95;
+            if (_calificacion > 3) total = subTotal *= 0.92;
+            return total;
+        }
     }
 }

@@ -15,6 +15,7 @@ namespace Dominio
         private Agencia _agencia;
         private static double s_costoBase = 400;
         private List<PaqueteDestino> _destinos = new List<PaqueteDestino>();
+        private double _precioCalculado = 0;
 
         public Paquete(DateTime fecha, Agencia agencia)
         {
@@ -35,15 +36,27 @@ namespace Dominio
             if (_fecha.Date == new DateTime().Date) throw new Exception("La fecha no es valida");
         }
 
-        public double CalcularTotal()
+        public double CalcularPrecioFinal()
         {
-            double total = s_costoBase;
-            foreach(PaqueteDestino pd in _destinos)
+            if(_precioCalculado == 0)
             {
-                total += pd.CalcularSubtotal();
+                double total = s_costoBase;
+                foreach (PaqueteDestino pd in _destinos)
+                {
+                    total += pd.CalcularSubtotal();
+                }
+
+                //Le pido a la agencia que me devuelva el porcentaje a aplicar
+                double descuento = _agencia.DevolverPorcentajeDescuento();
+                total -= total * descuento / 100;
+
+                //Esto seria utilizando la otra variante
+                //_precioCalculado = _agencia.DevolverPrecioConDescuentoAplicado(total);
+
+                _precioCalculado = total;
             }
 
-            return total;
+            return _precioCalculado;
         }
 
         public void AltaDestino(PaqueteDestino pd)
@@ -62,6 +75,19 @@ namespace Dominio
                 total =+ pd.Dias;
             }
             return total;
+        }
+
+        public bool ContieneDestino(Destino d)
+        {
+            bool contiene = false;
+            int i = 0;
+            while(i < _destinos.Count && !contiene) 
+            {
+                if (_destinos[i].Destino.Equals(d)) contiene = true;
+                i++;
+            }
+
+            return contiene;
         }
     }
 }

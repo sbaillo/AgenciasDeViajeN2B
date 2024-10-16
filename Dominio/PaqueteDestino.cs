@@ -23,6 +23,11 @@ namespace Dominio
             get { return _dias; }
         }
 
+        public Destino Destino
+        {
+            get { return _destino; }
+        }
+
         public void Validar()
         {
             if (_destino == null) throw new Exception("El destino no puede ser nulo");

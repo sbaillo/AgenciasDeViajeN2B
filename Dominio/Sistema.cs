@@ -158,5 +158,30 @@ namespace Dominio
 
             return buscados;
         }
+
+        public List<Paquete> PaquetesMasCarosQueMonto(double monto)
+        {
+            List<Paquete> buscados = new List<Paquete>();
+            foreach (Paquete p in _paquetes)
+            {
+                if (p.CalcularPrecioFinal() >= monto) buscados.Add(p);
+            }
+
+            return buscados;
+        }
+
+        public List<Paquete> PaquetesConDestino(string id)
+        {
+            Destino destinoBuscado = ObtenerDestinoPorId(id);
+            List<Paquete> buscados = new List<Paquete>();
+            foreach (Paquete p in _paquetes)
+            {
+                if (p.ContieneDestino(destinoBuscado)) buscados.Add(p);
+            }
+
+            return buscados;
+        }
+
+
     }
 }
