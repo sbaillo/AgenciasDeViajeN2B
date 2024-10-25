@@ -8,16 +8,42 @@ namespace Dominio
 {
     public class Sistema
     {
+        //PRIMER PASO SINGLETON: CREAR UN ATRIBUTO ESTATICO DONDE GUARDAREMOS LA UNICA INSTANCIA DE SISTEMA QUE VA A EXISTIR
+        private static Sistema s_instancia; 
+
         private List<Agencia> _agencias = new List<Agencia>();
         private List<Destino> _destinos = new List<Destino>();
         private List<Paquete> _paquetes = new List<Paquete>();
 
-        public Sistema() 
+
+        //SEGUNDO PASO SINGLETON: HACER PRIVADO EL CONSTRUCTOR DE SISTEMA
+        private Sistema() 
         {
             PrecargarAgencias();
             PrecargarDestinos();
             PrecargarPaquetes();
             PrecargarDestinosAPaquetes();
+        }
+
+        //TERCER PASO SINGLETON: HAGO LA PROPERTY ESTATICA DEL ATRIBUTO. SI EL ATRIBUTO ES NULO, ME GENERO UN NUEVO OBJETO DE TIPO SISTEMA
+        //Y SIEMPRE RETORNO ESE OBJETO GUARDADO EN EL ATRIBUTO
+        public static Sistema Instancia
+        {
+            get
+            {
+                if( s_instancia == null ) s_instancia = new Sistema();
+                return s_instancia;
+            }
+        }
+
+        public List<Agencia> Agencias
+        {
+            get { return _agencias; }
+        }
+
+        public List<Destino> Destinos
+        {
+            get { return _destinos; }
         }
 
         public void AltaAgencia(Agencia agencia)
@@ -32,6 +58,8 @@ namespace Dominio
             AltaAgencia(new Nacional("Rutatur", "Uruguay", "1518918989", 2000));
             AltaAgencia(new Nacional("Jetmar", "Uruguay", "1855188977", 1998));
             AltaAgencia(new Extranjera("Tudo viajem", "Brasil", 4));
+            AltaAgencia(new Extranjera("Paseos Botafogo", "Brasil", 5));
+            AltaAgencia(new Nacional("Urutur", "Uruguay", "5155118189", 1999));
         }
 
         public void AltaDestino(Destino destino)

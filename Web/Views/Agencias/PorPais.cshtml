@@ -1,0 +1,64 @@
+﻿@using Dominio;
+@{
+    ViewData["Title"] = "PorPais";
+}
+
+<h1>Por Pais</h1>
+
+<br />
+
+<form class="row row-cols-lg-auto g-3 align-items-center" method="get" action="/Agencias/ProcesarPorPais">
+
+    <div class="col-12">
+        <input class="form-control" type="text" placeholder="Ingrese pais" name="pais" />
+    </div>
+
+    <div class="col-12">
+        <input type="submit" value="Buscar" class="btn btn-success" />
+    </div>
+
+    <div class="col-12">
+        <a href="/agencias/PorPais" class="btn btn-secondary">Reiniciar</a>
+    </div>
+
+</form>
+
+<br />
+
+@if(ViewBag.Error != null)
+{
+    <div class="alert alert-danger">@ViewBag.Error</div>
+}
+
+@if(ViewBag.Listado != null)
+{
+    if (ViewBag.Listado.Count == 0)
+    {
+        <div class="alert alert-danger">No se encontraron resultados</div>
+
+    }
+    else
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Pais</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Agencia a in ViewBag.Listado)
+                {
+                    <tr>
+                        <td>@a.Id</td>
+                        <td>@a.Nombre</td>
+                        <td>@a.Pais</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
+
+

@@ -34,6 +34,21 @@ namespace Dominio
             get { return _codigo; }
         }
 
+        public string Nombre
+        {
+            get { return _nombre; }
+        }
+
+        public string Descripcion
+        {
+            get { return _descripcion; }
+        }
+
+        public TipoDestino Tipo
+        {
+            get { return _tipo; }
+        }
+
         public void Validar()
         {
             if (string.IsNullOrEmpty(_nombre)) throw new Exception("El nombre no puede ser vacio");
