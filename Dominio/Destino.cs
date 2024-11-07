@@ -67,5 +67,11 @@ namespace Dominio
             Destino destino = obj as Destino;
             return destino != null && this._codigo == destino._codigo;
         }
+
+        public void CambiarPrecio(double nuevoPrecio)
+        {
+            if (nuevoPrecio <= 0) throw new Exception("El precio debe ser mayor a 0");
+            _precioPorDia = nuevoPrecio;
+        }
     }
 }

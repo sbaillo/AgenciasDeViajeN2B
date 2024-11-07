@@ -22,6 +22,12 @@ namespace Dominio
             _pais = pais;
         }
 
+        public Agencia()
+        {
+            _id = s_ultId;
+            s_ultId++;
+        }
+
         public int Id 
         {  
             get { return _id; } 
@@ -30,14 +36,13 @@ namespace Dominio
         public string Pais
         { 
             get { return _pais; } 
+            set { _pais = value; }
         }
 
         public string Nombre
         {
-            get
-            {
-                return _nombre;
-            }
+            get { return _nombre; }
+            set { _nombre = value; }
         }
 
         public virtual void Validar()

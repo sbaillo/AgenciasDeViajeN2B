@@ -25,6 +25,24 @@ namespace Dominio
             _agencia = agencia;
         }
 
+        public Paquete()
+        {
+            _id = s_ultId;
+            s_ultId++;
+        }
+
+        public DateTime Fecha
+        {
+            get { return _fecha; }
+            set { _fecha = value; }
+        }
+
+        public Agencia Agencia
+        {
+            get { return _agencia; }
+            set { _agencia = value; }
+        }
+
         public int Id
         {
             get { return _id; }

@@ -15,6 +15,17 @@ namespace Dominio
             _calificacion = calificacion;
         }
 
+        public Extranjera():base()
+        {
+
+        }
+
+        public int Calificacion
+        {
+            get { return _calificacion; }
+            set { _calificacion = value;}
+        }
+
         private void ValidarCalificacion()
         {
             if (_calificacion < 1 || _calificacion > 5) throw new Exception("La calificacion debe estar entre 1 y 5");

@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewData["Title"] = "AltaAgenciaNacional";
+}
+
+<h1>Alta Agencia Nacional</h1>
+<br />
+
+@if(ViewBag.Error != null)
+{
+    <div class="alert alert-danger">@ViewBag.Error</div>
+}
+
+@if(ViewBag.Exito != null)
+{
+    <div class="alert alert-success">@ViewBag.Exito</div>
+}
+
+<form method="post" action="/agencias/AltaAgenciaNacional">
+    <div class="form-group">
+        <label class="form-label">Nombre</label>
+        <input type="text" placeholder="Ingrese nombre" class="form-control" name="nombre" value="@ViewBag.Nombre"/>
+    </div>
+    <div class="form-group">
+        <label class="form-label">Pais</label>
+        <input type="text" placeholder="Ingrese pais" class="form-control" name="pais" value="@ViewBag.Pais"/>
+    </div>
+    <div class="form-group">
+        <label class="form-label">RUT</label>
+        <input type="text" placeholder="Ingrese RUT" class="form-control" name="rut" value="@ViewBag.Rut"/>
+    </div>
+    <div class="form-group">
+        <label class="form-label">Año de inicio</label>
+        <input type="number" placeholder="Ingrese año" class="form-control" name="anio" value="@ViewBag.Anio"/>
+    </div>
+    <br />
+    <input type="submit" value="Crear" class="btn btn-secondary"/>
+</form>
+

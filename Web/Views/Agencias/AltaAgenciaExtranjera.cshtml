@@ -1,0 +1,39 @@
+﻿@using Dominio;
+@model Extranjera;
+@{
+    ViewData["Title"] = "AltaAgenciaExtranjera";
+}
+
+<h1>Alta Agencia Extranjera</h1>
+
+<br />
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">@ViewBag.Error</div>
+}
+
+@if (ViewBag.Exito != null)
+{
+    <div class="alert alert-success">@ViewBag.Exito</div>
+}
+
+<br />
+
+<form method="post" action="/agencias/AltaAgenciaExtranjera">
+    <div class="form-group">
+        <label class="form-label">Nombre</label>
+        <input type="text" placeholder="Ingrese nombre" class="form-control" name="Nombre" value="@Model.Nombre"/>
+    </div>
+    <div class="form-group">
+        <label class="form-label">Pais</label>
+        <input type="text" placeholder="Ingrese pais" class="form-control" name="Pais" value="@Model.Pais"/>
+    </div>
+    <div class="form-group">
+        <label class="form-label">Calificacion</label>
+        <input type="number" placeholder="Ingrese calificacion" class="form-control" name="Calificacion" value="@Model.Calificacion"/>
+    </div>
+    <br />
+    <input type="submit" value="Crear" class="btn btn-secondary"/>
+</form>
+

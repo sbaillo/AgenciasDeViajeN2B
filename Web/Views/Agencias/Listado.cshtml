@@ -8,6 +8,12 @@
 
 <br />
 
+@if (ViewBag.Exito != null)
+{
+    <div class="alert alert-success">@ViewBag.Exito</div>
+}
+<br />
+
 @if (ViewBag.Listado == null || ViewBag.Listado.Count == 0)
 {
     <div class="alert alert-danger">No hay agencias en el sistema</div>

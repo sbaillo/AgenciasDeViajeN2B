@@ -1,0 +1,41 @@
+﻿@using Dominio;
+@{
+    ViewData["Title"] = "CambiarPrecio";
+}
+
+<h1>Cambiar Precio</h1>
+<br />
+
+@if(ViewBag.Error != null)
+{
+    <div class="alert alert-danger">@ViewBag.Error</div>
+}
+
+@if(ViewBag.Exito != null)
+{
+    <div class="alert alert-success">@ViewBag.Exito</div>
+}
+
+<br />
+
+<form method="post" action="/destinos/CambiarPrecio">
+    <div class="form-group">
+        <label class="form-label">Seleccione destino para cambiar</label>
+        <select class="form-select" name="idDestino">
+            @foreach (Destino d in Sistema.Instancia.Destinos)
+            {
+                <option value="@d.Codigo">@d.Nombre</option>
+            }
+        </select>
+    </div>
+    <br />
+    <div class="form-group">
+        <label class="form-label">Precio nuevo</label>
+        <input type="number" class="form-control" placeholder="Ingrese precio nuevo" name="nuevoPrecio"/>
+    </div>
+
+    <br />
+
+    <input type="submit" class="btn btn-secondary" value="Cambiar precio" />
+</form>
+

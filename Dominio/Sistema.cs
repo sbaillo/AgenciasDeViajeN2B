@@ -210,6 +210,13 @@ namespace Dominio
             return buscados;
         }
 
+        public void CambiarPrecioDeDestino(string idDestino, double nuevoPrecio)
+        {
+            Destino d = ObtenerDestinoPorId(idDestino);
+            if (d == null) throw new Exception("El destino no se encontró");
+            d.CambiarPrecio(nuevoPrecio);
+        }
+
 
     }
 }

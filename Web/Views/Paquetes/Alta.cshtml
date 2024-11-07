@@ -1,0 +1,43 @@
+﻿@using Dominio;
+@model Paquete;
+@{
+    ViewData["Title"] = "Alta";
+}
+
+<h1>Alta</h1>
+
+<br />
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">@ViewBag.Error</div>
+}
+
+@if (ViewBag.Exito != null)
+{
+    <div class="alert alert-success">@ViewBag.Exito</div>
+}
+
+<br />
+
+<form method="post" action="/paquetes/alta">
+    <div class="form-group">
+        <label class="form-label">Fecha salida</label>
+        <input type="date" placeholder="Ingrese fecha de salida" class="form-control" name="Fecha"/>
+    </div>
+
+    <br />
+    <div class="form-group">
+        <label class="form-label">Agencia</label>
+        <select name="idAgencia" class="form-select">
+            @foreach(Agencia a in Sistema.Instancia.Agencias)
+            {
+                <option value="@a.Id">@a.Nombre</option>
+            }
+        </select>
+    </div>
+
+    <br />
+    <input type="submit" class="btn btn-secondary" value="Crear paquete"/>
+</form>
+

@@ -16,6 +16,7 @@ else
             <tr>
                 <th>Codigo</th>
                 <th>Nombre</th>
+                <th>Precio por dia</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -25,6 +26,7 @@ else
                 <tr>
                     <td>@d.Codigo</td>
                     <td>@d.Nombre</td>
+                    <td>$ @d.PrecioPorDia</td>
                     <td><a href="/destinos/detalle?codigo=@d.Codigo">Ver detalle</a></td>
                 </tr>    
             }
