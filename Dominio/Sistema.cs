@@ -14,6 +14,7 @@ namespace Dominio
         private List<Agencia> _agencias = new List<Agencia>();
         private List<Destino> _destinos = new List<Destino>();
         private List<Paquete> _paquetes = new List<Paquete>();
+        private List<Usuario> _usuarios = new List<Usuario>();
 
 
         //SEGUNDO PASO SINGLETON: HACER PRIVADO EL CONSTRUCTOR DE SISTEMA
@@ -23,6 +24,7 @@ namespace Dominio
             PrecargarDestinos();
             PrecargarPaquetes();
             PrecargarDestinosAPaquetes();
+            PrecargarUsuarios();
         }
 
         //TERCER PASO SINGLETON: HAGO LA PROPERTY ESTATICA DEL ATRIBUTO. SI EL ATRIBUTO ES NULO, ME GENERO UN NUEVO OBJETO DE TIPO SISTEMA
@@ -44,6 +46,20 @@ namespace Dominio
         public List<Destino> Destinos
         {
             get { return _destinos; }
+        }
+
+        public void AltaUsuario(Usuario u)
+        {
+            if (u == null) throw new Exception("El usuario no puede ser nulo");
+            u.Validar();
+            //Podriamos incluir alguna validación de que no existan usuarios con el mismo mail
+            _usuarios.Add(u);
+        }
+
+        public void PrecargarUsuarios()
+        {
+            AltaUsuario(new Cliente("Cliente 1", "cliente@cliente.com", "123456", ObtenerDestinoPorId("ABCD1234")));
+            AltaUsuario(new Admin("Admin 1", "admin@admin.com", "123456", "1234"));
         }
 
         public void AltaAgencia(Agencia agencia)
@@ -217,6 +233,38 @@ namespace Dominio
             d.CambiarPrecio(nuevoPrecio);
         }
 
+        public Usuario Login(string email, string pass)
+        {
+            Usuario usuarioBuscado = null;
+            int i = 0;
+            while(usuarioBuscado == null && i < _usuarios.Count)
+            {
+                if (_usuarios[i].Email == email && _usuarios[i].Pass == pass) usuarioBuscado = _usuarios[i];
+                i++;
+            }
 
+            return usuarioBuscado;
+        }
+
+        public Usuario ObtenerUsuarioPorEmail(string email)
+        {
+            Usuario usuarioBuscado = null;
+            int i = 0;
+            while (usuarioBuscado == null && i < _usuarios.Count)
+            {
+                if (_usuarios[i].Email == email) usuarioBuscado = _usuarios[i];
+                i++;
+            }
+
+            return usuarioBuscado;
+        }
+
+        public void CambiarPassDeUsuario(string email, string passNueva)
+        {
+            //Valido los datos que no sean nulos
+            Usuario buscado = ObtenerUsuarioPorEmail(email);
+            if (buscado == null) throw new Exception("No se encontró el usuario");
+            buscado.CambiarPass(passNueva);
+        }
     }
 }

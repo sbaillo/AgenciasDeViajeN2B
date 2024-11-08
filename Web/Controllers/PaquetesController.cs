@@ -10,12 +10,22 @@ namespace Web.Controllers
         [HttpGet]
         public IActionResult Alta()
         {
+            if (HttpContext.Session.GetString("rol") == null || HttpContext.Session.GetString("rol") != "Admin")
+            {
+                return View("NoAutorizado");
+            }
+
             return View(new Paquete());
         }
 
         [HttpPost]
         public IActionResult Alta(Paquete p, int idAgencia)
         {
+            if (HttpContext.Session.GetString("rol") == null || HttpContext.Session.GetString("rol") != "Admin")
+            {
+                return View("NoAutorizado");
+            }
+
             try
             {
                 Agencia agencia = miSistema.ObtenerAgenciaPorId(idAgencia);

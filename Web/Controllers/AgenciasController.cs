@@ -11,6 +11,11 @@ namespace Web.Controllers
         [HttpGet]
         public IActionResult Listado()
         {
+            if(HttpContext.Session.GetString("rol") == null)
+            {
+                return View("NoAutorizado");
+            }
+
             ViewBag.Listado = miSistema.Agencias;
             if (TempData["Exito"] != null) ViewBag.Exito = TempData["Exito"];
             return View();
@@ -19,6 +24,11 @@ namespace Web.Controllers
         [HttpGet]
         public IActionResult PorPais()
         {
+            if (HttpContext.Session.GetString("rol") == null)
+            {
+                return View("NoAutorizado");
+            }
+
             //ViewBag.Listado = miSistema.Agencias;
             return View();
         }
@@ -26,6 +36,11 @@ namespace Web.Controllers
         [HttpPost]
         public IActionResult ProcesarPorPais(string pais)
         {
+            if (HttpContext.Session.GetString("rol") == null)
+            {
+                return View("NoAutorizado");
+            }
+
             try
             {
                 if (string.IsNullOrEmpty(pais)) throw new Exception("Debe ingresar el nombre de un pais");
@@ -47,12 +62,22 @@ namespace Web.Controllers
         [HttpGet]
         public IActionResult AltaAgenciaNacional()
         {
+            if (HttpContext.Session.GetString("rol") == null || HttpContext.Session.GetString("rol") != "Admin")
+            {
+                return View("NoAutorizado");
+            }
+
             return View();
         }
 
         [HttpPost]
         public IActionResult AltaAgenciaNacional(string nombre, string pais, string rut, int anio)
         {
+            if (HttpContext.Session.GetString("rol") == null || HttpContext.Session.GetString("rol") != "Admin")
+            {
+                return View("NoAutorizado");
+            }
+
             try
             {
                 if (string.IsNullOrEmpty(nombre)) throw new Exception("El nombre no puede ser vacio");
@@ -80,12 +105,22 @@ namespace Web.Controllers
         [HttpGet]
         public IActionResult AltaAgenciaExtranjera()
         {
+            if (HttpContext.Session.GetString("rol") == null || HttpContext.Session.GetString("rol") != "Admin")
+            {
+                return View("NoAutorizado");
+            }
+
             return View(new Extranjera());
         }
 
         [HttpPost]
         public IActionResult AltaAgenciaExtranjera(Extranjera agencia)
         {
+            if (HttpContext.Session.GetString("rol") == null || HttpContext.Session.GetString("rol") != "Admin")
+            {
+                return View("NoAutorizado");
+            }
+
             try
             {
                 //Podria validar los atributos de la agencia si quisiera

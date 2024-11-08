@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewData["Title"] = "CambiarPass";
+}
+
+<h1>Cambiar Pass</h1>
+
+<br />
+
+@if(ViewBag.Error != null)
+{
+    <div class="alert alert-danger">@ViewBag.Error</div>
+    <br />
+}
+
+@if (ViewBag.Exito != null)
+{
+    <div class="alert alert-success">@ViewBag.Exito</div>
+    <br />
+}
+
+<form method="post" action="/usuarios/cambiarpass">
+    <label>Contraseña nueva: </label>
+    <input type="password" placeholder="Ingrese nueva contraseña" name="passNueva"/>
+    <br/>
+
+    <label>Repetir contraseña </label>
+    <input type="password" placeholder="Ingrese nuevamente la contraseña" name="passRepetida" />
+
+    <br />
+
+    <input type="submit" value="Cambiar pass" class="btn btn-success"/>
+
+</form>
+
